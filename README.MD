@@ -1,13 +1,13 @@
 ### AlfredWorkflows收集
 
-  - code.alfredworkflow
+> code.alfredworkflow
  
 参考：<a href="https://github.com/willfarrell/alfred-encode-decode-workflow">encode-decode-workflow v1.8</a>
 
 合并编码解码请求 添加unicode编码 
 
 
-  - OCR.alfredworkflow
+> OCR.alfredworkflow
   
   参考：<a href="https://github.com/sillybun/alfred-workflow/blob/master/OCR.alfredworkflow">https://github.com/sillybun/alfred-workflow/blob/master/OCR.alfredworkflow</a>
   
@@ -15,20 +15,20 @@
   截图OCR图片信息提取 自己添加了触发关键字 `zh`,`cn`
   
   
- - hump.alfredworkflow
+ > hump.alfredworkflow
  
  参考：http://xilidou.com
  
  变量名生成
  
- - V2EX.alfredworkflow 
+ > V2EX.alfredworkflow 
  
  v2ex.com帖子列表
  
   添加`h ,`hot`指令 查看热门列表
   
 
- - Timestamp+.alfredworkflow 
+ > Timestamp+.alfredworkflow 
  
  参考：http://jousch.com
  修改添加当前时间的格式数据获取
