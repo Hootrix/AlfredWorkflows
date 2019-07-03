@@ -1,10 +1,11 @@
 ### AlfredWorkflows收集
 
 > code.alfredworkflow
+
+合并编码解码请求,添加unicode编码,\x十六进制字符解码，长度计算,数字求和（查看369幸运数字）
  
 参考：<a href="https://github.com/willfarrell/alfred-encode-decode-workflow">encode-decode-workflow v1.8</a>
 
-合并编码解码请求 添加unicode编码 
 
 
 > OCR.alfredworkflow
