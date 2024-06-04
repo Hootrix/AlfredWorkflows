@@ -15,8 +15,9 @@ func (resp *AlfredResponse) Print() {
 }
 
 type AlfredItem struct {
-	Title    string `json:"title"`
-	Subtitle string `json:"subtitle"`
-	Arg      string `json:"arg,omitempty"`
-	Icon     string `json:"icon,omitempty"` // 每行显示的 icon
+	Title        string `json:"title"`
+	Subtitle     string `json:"subtitle"`
+	Arg          string `json:"arg,omitempty"`
+	Icon         string `json:"icon,omitempty"`         // 每行显示的 icon
+	Quicklookurl string `json:"quicklookurl,omitempty"` // 快速预览的URL
 }

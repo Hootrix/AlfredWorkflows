@@ -1,0 +1,12 @@
+timeout: 10 # 请求超时 秒
+services:
+
+# https://github.com/OwO-Network/DeepLX
+  - name: "deeplx"
+    url: https://deeplx.mingming.dev/translate # TODO
+    token: 
+
+# https://ai.youdao.com/console/#/
+  - name: "youdao"
+    app_key: 123a # TODO
+    app_secret: 123123123aa # TODO
