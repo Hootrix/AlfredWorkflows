@@ -185,25 +185,23 @@ func (cae *CodeAlfredWorkflow) FromHEX() string {
 	// Split the input string on '\X' to get individual hex codes
 	re := regexp.MustCompile(`(?i)\\X`)
 	parts := re.Split(input, -1)
-	var decodedRunes []rune
+	var decodedBytess []byte
 
 	for _, part := range parts {
 		if part == "" {
 			continue
 		}
 
-		// Convert hex string to integer (unicode code point)
-		codePoint, err := strconv.ParseInt(part, 16, 32)
+		codePoint, err := strconv.ParseUint(part, 16, 8)
 		if err != nil {
 			return ""
 		}
 
-		// Append the rune corresponding to the unicode code point
-		decodedRunes = append(decodedRunes, rune(codePoint))
+		decodedBytess = append(decodedBytess, byte(codePoint))
 	}
 
 	// Convert runes to a string
-	decodedString := string(decodedRunes)
+	decodedString := string(decodedBytess)
 	return decodedString
 }
 
