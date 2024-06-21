@@ -34,8 +34,6 @@ func main() {
 			return unicode.IsSpace(r)
 		})
 
-		// fmt.Println(input)
-
 		//时间戳
 		if regex := regexp.MustCompile(`^\s*(\d+)\s*$`); regex != nil {
 			matchs := regex.FindStringSubmatch(input)
@@ -44,14 +42,20 @@ func main() {
 				tm := time.Unix(ts, 0)
 				items = append(items, common.AlfredItem{Title: tm.Format(time.DateTime), Subtitle: tm.Format(time.DateTime), Arg: tm.Format(time.DateTime)})
 			}
-
-			//其他格式
-		} else if tm, err := dateparse.ParseLocal(input); err == nil {
-			items = append(items, common.AlfredItem{Title: tm.Format(time.DateTime), Subtitle: tm.Format(time.DateTime), Arg: tm.Format(time.DateTime)})
-			items = append(items, common.AlfredItem{Title: strconv.FormatInt(tm.Unix(), 10), Subtitle: strconv.FormatInt(tm.Unix(), 10), Arg: strconv.FormatInt(tm.Unix(), 10)})
-		} else {
-			items = append(items, common.AlfredItem{Title: "ERROR", Subtitle: "nil", Arg: ""})
 		}
+
+		//其他格式
+		if len(items) < 1 {
+			if tm, err := dateparse.ParseLocal(input); err == nil {
+				items = append(items, common.AlfredItem{Title: tm.Format(time.DateTime), Subtitle: tm.Format(time.DateTime), Arg: tm.Format(time.DateTime)})
+				items = append(items, common.AlfredItem{Title: strconv.FormatInt(tm.Unix(), 10), Subtitle: strconv.FormatInt(tm.Unix(), 10), Arg: strconv.FormatInt(tm.Unix(), 10)})
+			}
+		}
+
+	}
+
+	if len(items) < 1 {
+		items = append(items, common.AlfredItem{Title: "ERROR", Subtitle: "nil", Arg: ""})
 	}
 	// fmt.Printf("%+v\n", result)
 
