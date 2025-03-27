@@ -4,6 +4,7 @@ import (
 	"AlfredWorkflows/common"
 	"crypto/md5"
 	"crypto/sha256"
+	"encoding/base32"
 	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
@@ -55,6 +56,8 @@ func (caw *CodeAlfredWorkflow) Do() common.AlfredResponse {
 
 	caw.AddItem("MD5", caw.Md5())
 	caw.AddItem("SHA256", caw.SHA256())
+	caw.AddItem("EncodeBase32", caw.EncodeBase32())
+	caw.AddItem("DecodeBase32", caw.DecodeBase32())
 	caw.AddItem("EncodeBase64", caw.EncodeBase64())
 	caw.AddItem("DecodeBase64", caw.DecodeBase64())
 	caw.AddItem("EncodeStandardURL", caw.EncodeStandardURL())
@@ -144,6 +147,18 @@ func (caw *CodeAlfredWorkflow) SHA256() string {
 
 func (cae *CodeAlfredWorkflow) EncodeBase64() string {
 	return base64.StdEncoding.EncodeToString([]byte(cae.Args))
+}
+
+func (cae *CodeAlfredWorkflow) EncodeBase32() string {
+	return base32.StdEncoding.EncodeToString([]byte(cae.Args))
+}
+
+func (cae *CodeAlfredWorkflow) DecodeBase32() string {
+	if bt, err := base32.StdEncoding.DecodeString(cae.Args); err != nil {
+		return ""
+	} else {
+		return string(bt)
+	}
 }
 
 func (cae *CodeAlfredWorkflow) DecodeBase64() string {
