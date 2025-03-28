@@ -61,9 +61,8 @@ export default function Command(props: CommandProps) {
         console.log(`使用二进制文件路径: ${binaryPath}`);
         
         // 如果没有输入，使用当前时间戳
-        // const query = searchText || String(Math.floor(Date.now() / 1000));
         const query = searchText || "";
-        
+        console.log(`使用查询: ${query}`);
         // 执行二进制文件并获取输出
         const { stdout } = await execPromise(`"${binaryPath}" "${query}"`);
         

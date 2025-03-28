@@ -38,6 +38,26 @@ Raycast版本的时间戳转换插件，提供以下功能：
 make raycast_timestamp
 ```
 
+### 2. Translate（Translate.alfredworkflow的迁移版本）
+
+Raycast版本的翻译插件，提供以下功能：
+- 多种翻译服务（deeplx, youdao）
+
+安装与使用：
+```
+make raycast_translate
+```
+
+### 3. Code（Code.alfredworkflow的迁移版本）
+
+Raycast版本的编码解码插件，提供以下功能：
+- 多种编码方式
+
+安装与使用：
+```
+make raycast_code
+```
+
 ## 三、构建与使用
 
 使用 Makefile 进行构建和安装：

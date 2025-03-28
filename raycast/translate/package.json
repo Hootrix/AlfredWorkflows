@@ -1,0 +1,51 @@
+{
+  "name": "translate",
+  "title": "deeplx,youdao翻译工具",
+  "description": "翻译工具",
+  "icon": "command-icon.png",
+  "author": "Hootrix",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "index",
+      "title": "translate",
+      "description": "翻译工具",
+      "mode": "view",
+      "keywords": ["translate", "翻译", "翻译工具","deeplx","youdao"],
+      "arguments": [
+        {
+          "name": "query",
+          "placeholder": "输入翻译内容",
+          "type": "text",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "preferences": [
+    {
+      "name": "binaryPath",
+      "title": "二进制文件路径",
+      "description": "请输入translate.bin文件的完整路径（必填）",
+      "type": "textfield",
+      "required": true,
+      "default": ""
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.55.2",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^1.0.6",
+    "@types/node": "^20.5.6",
+    "@types/react": "^18.2.21",
+    "eslint": "^8.48.0",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "lint": "ray lint"
+  }
+}
