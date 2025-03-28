@@ -31,6 +31,10 @@ clean:
 raycast_timestamp:
 	cd raycast/timestamp_plus && npm install && npm run dev
 
+# 安装并启动 Raycast code 插件
+raycast_code:
+	cd raycast/code && npm install && npm run dev
+
 # 显示帮助信息
 help:
 	@echo "可用的 make 命令："
@@ -39,5 +43,6 @@ help:
 	@echo "  make translate       - 只构建 translate 模块"
 	@echo "  make code            - 只构建 code 模块"
 	@echo "  make raycast_timestamp - 安装并启动 Raycast timestamp_plus 插件"
+	@echo "  make raycast_code - 安装并启动 Raycast code 插件"
 	@echo "  make clean           - 清理所有生成的二进制文件"
 	@echo "  make help            - 显示此帮助信息"

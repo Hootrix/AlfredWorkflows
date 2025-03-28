@@ -1,20 +1,20 @@
 {
-  "name": "timestamp-plus",
-  "title": "时间戳转换工具",
-  "description": "时间戳与日期时间互相转换",
+  "name": "code",
+  "title": "快速编解码工具",
+  "description": "快速编解码工具",
   "icon": "command-icon.png",
   "author": "Hootrix",
   "license": "MIT",
   "commands": [
     {
       "name": "index",
-      "title": "ts",
-      "description": "时间戳与日期时间互相转换",
+      "title": "code",
+      "description": "编解码工具",
       "mode": "view",
       "arguments": [
         {
           "name": "query",
-          "placeholder": "输入时间戳或日期",
+          "placeholder": "输入编解码内容",
           "type": "text",
           "required": false
         }
@@ -25,7 +25,7 @@
     {
       "name": "binaryPath",
       "title": "二进制文件路径",
-      "description": "请输入timestamp-plus.bin文件的完整路径（必填）",
+      "description": "请输入code.bin文件的完整路径（必填）",
       "type": "textfield",
       "required": true,
       "default": ""
