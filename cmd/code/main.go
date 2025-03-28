@@ -1,7 +1,7 @@
 package main
 
 import (
-	"AlfredWorkflows/common"
+	"AlfredWorkflows/internal/platform/alfred"
 	"crypto/md5"
 	"crypto/sha256"
 	"encoding/base32"
@@ -10,9 +10,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"html"
-
-	// _ "net/http/pprof"
 	"net/url"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -20,27 +19,12 @@ import (
 )
 
 func main() {
-	// go func() {
-	// 	log.Println(http.ListenAndServe("localhost:6060", nil))
-	// }()
 
-	mCodeAlfredWorkflow := CodeAlfredWorkflow{
-		AlfredWorkflow: common.NewAlfredWorkflow(),
-	}
-	resp := mCodeAlfredWorkflow.Do()
-	// fmt.Println(mCodeAlfredWorkflow.ActionItemName)
-	resp.Print()
+	workflow := alfred.NewWorkflow()
 
-}
+	workflow.Query(os.Args[1:])
 
-type CodeAlfredWorkflow struct {
-	// Query      string
-	// ActionName []string
-	*common.AlfredWorkflow
-}
-
-func (caw *CodeAlfredWorkflow) Do() common.AlfredResponse {
-
+	caw := &CodeAlfredWorkflow{AlfredWorkflow: workflow}
 	caw.AddItem("Length", caw.Length())
 	caw.AddItem("upper", strings.ToUpper(caw.Args))
 	caw.AddItem("lower", strings.ToLower(caw.Args))
@@ -84,9 +68,12 @@ func (caw *CodeAlfredWorkflow) Do() common.AlfredResponse {
 	// 哈😄你好😄1 <==> \u54C8\uD83D\uDE04\u4F60\u597D\U0001F604\u0031
 	// 啊哈哈哈哈😄你好😀 <==> \u554a\u54c8\u54c8\u54c8\u54c8\ud83d\ude04\u4f60\u597d\U0001F600
 
-	return common.AlfredResponse{
-		Items: caw.Items,
-	}
+	workflow.GetResponse().Print()
+
+}
+
+type CodeAlfredWorkflow struct {
+	*alfred.AlfredWorkflow
 }
 
 func (caw *CodeAlfredWorkflow) Length() string {

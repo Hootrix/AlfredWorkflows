@@ -1,0 +1,50 @@
+{
+  "name": "timestamp-plus",
+  "title": "时间戳转换工具",
+  "description": "时间戳与日期时间互相转换",
+  "icon": "command-icon.png",
+  "author": "你的名字",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "index",
+      "title": "ts",
+      "description": "时间戳与日期时间互相转换",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "query",
+          "placeholder": "输入时间戳或日期",
+          "type": "text",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "preferences": [
+    {
+      "name": "binaryPath",
+      "title": "二进制文件路径",
+      "description": "请输入timestamp-plus.bin文件的完整路径（必填）",
+      "type": "textfield",
+      "required": true,
+      "default": ""
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.55.2",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^1.0.6",
+    "@types/node": "^20.5.6",
+    "@types/react": "^18.2.21",
+    "eslint": "^8.48.0",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "lint": "ray lint"
+  }
+}
