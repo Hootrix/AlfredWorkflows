@@ -1,5 +1,5 @@
 import { ActionPanel, List, Action, showToast, Toast, popToRoot, getPreferenceValues, openExtensionPreferences, Clipboard } from "@raycast/api";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { exec } from "child_process";
 import { promisify } from "util";
 import path from "path";
@@ -22,13 +22,40 @@ interface CommandProps {
   };
 }
 
+// 防抖函数
+function debounce<T extends (...args: any[]) => any>(func: T, wait: number): (...args: Parameters<T>) => void {
+  let timeout: NodeJS.Timeout | null = null;
+  
+  return function(...args: Parameters<T>) {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    
+    timeout = setTimeout(() => {
+      func(...args);
+      timeout = null;
+    }, wait);
+  };
+}
+
 export default function Command(props: CommandProps) {
   const [items, setItems] = useState<Item[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchText, setSearchText] = useState(props.arguments?.query || "");
 
+  // 使用 useRef 存储防抖后的函数
+  const debouncedFetchRef = useRef<(text: string) => void>();
+  
+  // 初始化防抖函数
   useEffect(() => {
-    async function fetchItems() {
+    async function fetchItems(text: string) {
+      // 如果是空输入或只有空格，则不执行查询
+      if (!text.trim()) {
+        setItems([]);
+        setIsLoading(false);
+        return;
+      }
+      
       setIsLoading(true);
       try {
         const fs = require('fs');
@@ -60,11 +87,15 @@ export default function Command(props: CommandProps) {
         
         console.log(`使用二进制文件路径: ${binaryPath}`);
         
-        // 如果没有输入，使用当前时间戳
-        const query = searchText || "";
-        
+        // 使用传入的文本作为查询
+        const query = text.trim();
+        console.log(`使用查询: ${query}`);
         // 执行二进制文件并获取输出
-        const { stdout } = await execPromise(`"${binaryPath}" "${query}"`);
+        // 使用 shellEscape 函数处理参数中的特殊字符
+        const shellEscape = (str: string) => {
+          return `'${str.replace(/'/g, "'\\''")}'`;
+        };
+        const { stdout } = await execPromise(`${shellEscape(binaryPath)} ${shellEscape(query)}`);
         
         // 解析 JSON 结果
         const response = JSON.parse(stdout);
@@ -81,7 +112,22 @@ export default function Command(props: CommandProps) {
       }
     }
 
-    fetchItems();
+    // 创建防抖函数，延迟 300ms
+    debouncedFetchRef.current = debounce(fetchItems, 300);
+    
+    // 如果有初始查询，立即执行
+    if (props.arguments?.query) {
+      fetchItems(props.arguments.query);
+    } else {
+      setIsLoading(false); // 如果没有初始查询，则不显示加载状态
+    }
+  }, [props.arguments?.query]);
+  
+  // 监听搜索文本变化
+  useEffect(() => {
+    if (debouncedFetchRef.current) {
+      debouncedFetchRef.current(searchText);
+    }
   }, [searchText]);
 
   return (
