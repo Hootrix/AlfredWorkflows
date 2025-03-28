@@ -11,6 +11,7 @@
       "title": "ts",
       "description": "时间戳与日期时间互相转换",
       "mode": "view",
+      "keywords": ["timestamp", "ts", "时间戳"],
       "arguments": [
         {
           "name": "query",
