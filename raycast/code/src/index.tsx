@@ -131,7 +131,7 @@ export default function Command(props: CommandProps) {
   }, [searchText]);
 
   return (
-    <List isLoading={isLoading} onSearchTextChange={setSearchText} searchBarPlaceholder="输入时间戳或日期...">
+    <List isLoading={isLoading} onSearchTextChange={setSearchText} searchText={searchText} searchBarPlaceholder="输入时间戳或日期...">
       {items.map((item, index) => (
         <List.Item
           key={index}
